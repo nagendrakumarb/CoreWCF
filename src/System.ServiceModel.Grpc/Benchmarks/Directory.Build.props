@@ -1,0 +1,17 @@
+<Project>
+  <Import Project="..\Sources\Versions.props" />
+
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    
+    <CodeAnalysisRuleSet>..\..\Sources\StyleCope.ruleset</CodeAnalysisRuleSet>
+
+    <LangVersion>latest</LangVersion>
+	<SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers.Unstable" PrivateAssets="All" />
+  </ItemGroup>
+</Project>

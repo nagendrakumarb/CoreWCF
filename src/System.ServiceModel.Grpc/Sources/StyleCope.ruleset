@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Default rules" Description="No description" ToolsVersion="15.0">
+  <IncludeAll Action="Warning" />
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <!-- Using directive should appear within a namespace declaration -->
+    <Rule Id="SA1200" Action="None" />
+	
+	<!-- File header should contain file name. <copyright file="filename.cs" -->
+    <Rule Id="SA1637" Action="None" />
+	<!-- The copyright tag should contain a non-empty company attribute -->
+	<Rule Id="SA1640" Action="None" />
+	<!-- The file header copyright text should match the copyright text from the settings -->
+	<Rule Id="SA1636" Action="None" />
+
+	<!-- Prefix local calls with this -->
+	<Rule Id="SA1101" Action="None" />
+	<!-- Field '_abc' should not begin with an underscore -->
+	<Rule Id="SA1309" Action="None" />
+	<!-- Use trailing comma in multi-line initializers -->
+	<Rule Id="SA1413" Action="None" />
+	<!-- The parameter spans multiple lines -->
+	<Rule Id="SA1118" Action="None" />
+
+	<!-- Elements should be documented -->
+	<Rule Id="SA1600" Action="None" />
+	<!-- XML comment analysis is disabled due to project configuration (only for release) -->
+	<Rule Id="SA0001" Action="None" />
+	<!-- Partial elements should be documented -->
+	<Rule Id="SA1601" Action="None" />
+	<!-- Enumeration items should be documented -->
+	<Rule Id="SA1602" Action="None" />
+
+  </Rules>
+</RuleSet>

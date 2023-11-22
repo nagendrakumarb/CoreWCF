@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyTitle>ServiceModel.Grpc.DesignTime</AssemblyTitle>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.Core.Api" GeneratePathProperty="true" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceModel.Grpc.DesignTime.Roslyn3\ServiceModel.Grpc.DesignTime.Roslyn3.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\ServiceModel.Grpc.DesignTime.Roslyn4\ServiceModel.Grpc.DesignTime.Roslyn4.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\ServiceModel.Grpc\ServiceModel.Grpc.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!-- https://github.com/dotnet/roslyn/discussions/47517#discussioncomment-64145 -->
+    <Copy SourceFiles="$(PKGGrpc_Core_Api)\lib\netstandard2.0\Grpc.Core.Api.dll" DestinationFolder="$(OutDir)dependencies" />
+    <Copy SourceFiles="$(OutDir)ServiceModel.Grpc.dll" DestinationFolder="$(OutDir)dependencies" />
+  </Target>
+
+  <ItemGroup Condition="'$(Configuration)' != 'Debug'" Label="Packaging">
+    <Content Include="README.md" PackagePath="" />
+    <Content Include="..\..\LICENSE" PackagePath="" />
+    <Content Include="..\..\build-out\DesignTimeThirdPartyNotices.txt" PackagePath="ThirdPartyNotices.txt" />
+
+    <None Include="build\*" Pack="true" PackagePath="build/" />
+    <None Include="buildTransitive\*" Pack="true" PackagePath="buildTransitive/" />
+    <None Include="build\ServiceModel.Grpc.DesignTime.targets" Pack="true" PackagePath="buildTransitive/ServiceModel.Grpc.DesignTime.targets" />
+
+    <None Include="..\ServiceModel.Grpc.DesignTime.Roslyn3\bin\$(Configuration)\ServiceModel.Grpc.DesignTime.Roslyn3.dll"
+          PackagePath="analyzers\dotnet\roslyn3.8\cs"
+          Pack="true"
+          Visible="false" />
+    <None Include="..\ServiceModel.Grpc.DesignTime.Roslyn4\bin\$(Configuration)\ServiceModel.Grpc.DesignTime.Roslyn4.dll"
+          PackagePath="analyzers\dotnet\roslyn4.0\cs"
+          Pack="true"
+          Visible="false" />
+
+    <Content Include="$(OutDir)dependencies\*" PackagePath="build/dependencies" Visible="false" />
+  </ItemGroup>
+
+</Project>
